@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddCurrencyRequestDto {
-    List<EnumCurrency> currencies;
+    private List<EnumCurrency> currencies;
 }

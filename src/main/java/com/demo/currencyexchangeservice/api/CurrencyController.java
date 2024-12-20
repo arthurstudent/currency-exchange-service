@@ -51,7 +51,7 @@ public class CurrencyController {
     )
     @RateLimiter(name = "api")
     @PostMapping
-    public ResponseEntity<?> addNewCurrency(@RequestBody AddCurrencyRequestDto addCurrencyRequestDto) {
+    public ResponseEntity<?> addNewCurrency(@org.springframework.web.bind.annotation.RequestBody AddCurrencyRequestDto addCurrencyRequestDto) {
         currencyManagementService.addCurrency(addCurrencyRequestDto);
         return ResponseEntity.ok().build();
     }
