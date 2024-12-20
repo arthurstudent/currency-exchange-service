@@ -79,6 +79,22 @@ This project is a Spring Boot application that provides a REST API for managing 
 - Currently, the database is stored locally and saved in the `db` folder at the root of the project.
 - To ensure the database is recreated, remove the `volume` section from the `docker-compose` file.
 ---
+### Create .env and Define API key
+
+    exchange-api.api-key={YOUR_API_KEY}
+---
+
+### Docker Run
+The application can be built and run by the `Docker` engine. The `Dockerfile` has multistage build, so you do not need to build and run separately.
+
+Please follow directions shown below in order to build and run the application with Docker Compose file;
+
+```sh
+$ cd currency-exchange-service
+$ docker-compose up -d --build
+```
+---
+
 ## Technologies
 
 - **Java 17**
