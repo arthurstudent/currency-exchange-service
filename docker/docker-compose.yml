@@ -1,0 +1,38 @@
+version: '3.8'
+
+networks:
+  currency-exchange-service-net:
+
+services:
+  currency-exchange-service-app:
+    build: ../
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    environment:
+      POSTGRES_PASSWORD:
+      POSTGRES_USER:
+      API_KEY:
+    networks:
+      currency-exchange-service-net:
+    depends_on:
+      - currency-exchange-db
+
+  currency-exchange-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: exchange_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD:
+    networks:
+      currency-exchange-service-net:
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -h 127.0.0.1" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    volumes:
+      - ../db:/var/lib/postgresql/data:rw
