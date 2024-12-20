@@ -4,7 +4,7 @@ This project is a Spring Boot application that provides a REST API for managing 
 
 ---
 
-## **Features**
+## Features
 
 - **Get a list of tracked currencies**: Retrieve all currencies currently being tracked by the application.
 - **Add a new currency**: Add a currency to the system for tracking exchange rates.
@@ -15,8 +15,71 @@ This project is a Spring Boot application that provides a REST API for managing 
 - **Rate limiting**: Limits the frequency of requests to the external API using Resilience4j.
 
 ---
+## Flow diagram 
+<img src="media/diagram.png" alt="Main Information" width="1000" height="600">
+---
 
-## **Technologies**
+## API Documentation
+- Open [Swagger UI](http://localhost:8080/swagger-ui.html) in your browser for API  if you run without a docker.
+- Open [Swagger UI](http://localhost:8090/swagger-ui.html) in your browser if with
+
+---
+
+## **Explore REST APIs**
+
+#### You can get a postman collection in a `collection` folder
+
+| Method | URL                                      | Description                     |
+|--------|------------------------------------------|---------------------------------|
+| GET    | `/api/v1/exchange_rates`                | Get exchange rates             |
+| GET    | `/api/v1/exchange`                      | Convert amount using rates     |
+| GET    | `/api/v1/currency`                      | Get tracked currencies         |
+| POST   | `/api/v1/currency`                      | Track new currencies           |
+
+### API Details
+
+#### Get exchange rates
+- **URL**: `http://localhost:8090/api/v1/exchange_rates?source=USD&targets=EUR,GBP,UAH`
+- **Method**: GET
+- **Query Parameters**:
+  - `source`: Currency to convert from (e.g., `USD`)
+  - `targets`: Comma-separated list of target currencies (e.g., `EUR,GBP,UAH`)
+
+#### Convert amount using rates
+- **URL**: `http://localhost:8090/api/v1/exchange?source=USD&targets=EUR,UAH&amount=10`
+- **Method**: GET
+- **Query Parameters**:
+  - `source`: Currency to convert from (e.g., `USD`)
+  - `targets`: Comma-separated list of target currencies (e.g., `EUR,UAH`)
+  - `amount`: Amount to convert (e.g., `10`)
+
+#### Get tracked currencies
+- **URL**: `http://localhost:8090/api/v1/currency`
+- **Method**: GET
+
+#### Track new currencies
+- **URL**: `http://localhost:8090/api/v1/currency`
+- **Method**: POST
+- **Body**:
+```json
+{
+    "currencies": ["USD", "EUR"]
+}
+```
+
+## Prerequisites
+
+---
+- Get API KEY from apilayer.com
+- Maven or Docker
+---
+
+## Notes
+
+- Currently, the database is stored locally and saved in the `db` folder at the root of the project.
+- To ensure the database is recreated, remove the `volume` section from the `docker-compose` file.
+---
+## Technologies
 
 - **Java 17**
 - **Spring Boot 3.3.6**
@@ -36,50 +99,4 @@ This project is a Spring Boot application that provides a REST API for managing 
 
 ---
 
-## **API Documentation**:
-   - Open [Swagger UI](http://localhost:8080/swagger-ui.html) in your browser for API  if you run without a docker.
-   - Open [Swagger UI](http://localhost:8090/swagger-ui.html) in your browser if with
 
----
-
-## Endpoints
-
-### 1. **Get All Currencies**
-- **URL**: `/api/v1/currencies`
-- **Method**: GET
-- **Response**:
-  ```json
-  [
-    "USD",
-    "EUR",
-    "UAH"
-  ]
-  ```
-
-### 2. **Add New Currency**
-- **URL**: `/api/v1/currencies`
-- **Method**: POST
-- **Request Body**:
-  ```json
-  {
-    "currencies": ["USD", "EUR"]
-  }
-  ```
-
-- **Response**: `200 OK`
-
-### 3. **Get Exchange Rates**
-- **URL**: `/api/v1/exchange-rates/{baseCurrency}`
-- **Method**: GET
-- **Response**:
-  ```json
-  {
-    "baseCurrency": "USD",
-    "rates": {
-      "EUR": 0.85,
-      "UAH": 36.5
-    }
-  }
-  ```
-
----

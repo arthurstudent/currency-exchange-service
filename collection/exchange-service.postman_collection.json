@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "5a0056d0-de7f-4919-94db-168d395e53ed",
+		"name": "exchange-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14431760"
+	},
+	"item": [
+		{
+			"name": "Get exchange rates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/exchange_rates?source=USD&targets=EUR, GBP, UAH",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"exchange_rates"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "USD"
+						},
+						{
+							"key": "targets",
+							"value": "EUR, GBP, UAH"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert amount with  rates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/exchange?source=USD&targets=EUR,UAH&amount=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"exchange"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "USD"
+						},
+						{
+							"key": "targets",
+							"value": "EUR,UAH"
+						},
+						{
+							"key": "amount",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tracked currencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/currency",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"currency"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Track new currencies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currencies\": [\r\n        \"USD\", \"EUR\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/v1/currency",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"currency"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

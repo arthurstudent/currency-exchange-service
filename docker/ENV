@@ -1,0 +1,3 @@
+API_KEY - API key from https://apilayer.com/
+POSTGRES_PASSWORD - postgresql password
+POSTGRES_USER - postgres user
